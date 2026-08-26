@@ -1,0 +1,113 @@
+generated: '2026-08-25'
+method: probed
+source: >-
+  Live probes of https://api.mcisaas.com (2026-08-25), the OIDC discovery documents at
+  kc.mcisaas.com saved in well-known/, Micro Connect's own published routing config at
+  https://mcisaas.com/mcc-share/domain.js, and the Open Platform SPA bundle at
+  https://open.microconnect.cn/mcc-open/assets/index.4743a4fd.js
+note: >-
+  Micro Connect publishes NO API conventions documentation. Everything below was observed on
+  the live gateway or read out of the provider's own first-party JavaScript. Where a
+  convention could not be observed it is recorded as unknown rather than guessed — an
+  unauthenticated caller cannot see request semantics behind a login.
+auth_style:
+  scheme: OpenID Connect bearer token (Keycloak)
+  header: 'Authorization: Bearer <access_token>'
+  issuer: https://kc.mcisaas.com/auth/realms/numa-realm
+  see: authentication/micro-connect-authentication.yml
+base_url:
+  production: https://api.mcisaas.com/api
+  derivation: >-
+    Micro Connect's own domain.js maps every first-party web host — open.microconnect.com,
+    open.microconnect.cn, store.microconnect.com, store.microconnect.cn, mcms.microconnect.com,
+    lianyingtong.microconnect.com/.cn, arm-conf.mcisaas.com and mcisaas.com — to
+    apiDomain api.mcisaas.com and kcDomain kc.mcisaas.com, and
+    getDomainFullPathByCurrentHost() appends the "/api" prefix.
+  environments:
+    production:
+      api: api.mcisaas.com
+      idp: kc.mcisaas.com
+    sandbox:
+      api: sandbox-api.mcisaas.com
+      idp: sandbox-kc.mcisaas.com
+      dns: not resolvable from the public internet on 2026-08-25
+    uat:
+      api: uat1-api.mcisaas.com
+      idp: uat1-kc.mcisaas.com
+    staging:
+      api: stg1-api.mcisaas.com … stg4-api.mcisaas.com
+      idp: stg1-kc.mcisaas.com … stg4-kc.mcisaas.com
+    development:
+      api: dev1-api.mcisaas.com … dev4-api.mcisaas.com
+      idp: dev1-kc.mcisaas.com … dev4-kc.mcisaas.com
+  note: >-
+    The provider ships its full environment topology — four dev, four staging, one UAT and a
+    sandbox tier — inside a publicly served JS file. Only the production tier resolves publicly.
+gateway:
+  product: Apache ShenYu
+  evidence: >-
+    Unmatched routes answer HTTP 200 with
+    {"code":-107,"message":"divide:Can not find selector, please check your configuration!","data":null},
+    the ShenYu "divide" plugin's selector-miss message.
+error_envelope:
+  style: bespoke code/message/data wrapper
+  content_type: application/json
+  http_status_on_error: 200 (observed on gateway routing misses)
+  shape:
+    code: integer, negative on error
+    message: string, human-readable, English, may leak the internal plugin name
+    data: null on error
+  rfc9457: false
+  see: errors/micro-connect-problem-types.yml
+pagination:
+  documented: false
+  style: unknown
+  note: >-
+    Not observable without credentials. The SPA bundle names list endpoints
+    (/open-platform/cdo/order/list, /open-platform/cdo/income/list) but the request shape is
+    built at runtime and was not fabricated here.
+idempotency:
+  supported: unknown
+  header: null
+  note: >-
+    No Idempotency-Key header, no documented retry-safety guarantee, and no way to observe one
+    without credentials. NO Idempotency pointer is emitted in apis.yml — asserting one on an
+    unverifiable surface would be false credit.
+rate_limit_signaling:
+  documented: false
+  headers_observed: []
+  see: rate-limits/micro-connect-rate-limits.yml
+request_id_tracing:
+  documented: false
+  headers_observed: []
+versioning:
+  in_path: false
+  see: lifecycle/micro-connect-lifecycle.yml
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+dry_run_mode:
+  supported: unknown
+  note: >-
+    Not published, not observable. The SPA does expose a sandbox-test-account generator
+    (/open-platform/sandTestAccount/generateSandTestAccount and
+    /open-platform/sandTestAccount/downloadSandTestAccount), which implies a test-account
+    facility exists behind the login, but no test-mode semantics are documented.
+reversibility:
+  assessed: false
+  grade: null
+  read_only: false
+  note: >-
+    NOT ASSESSABLE. The Open Platform is unambiguously a write surface — its own route names
+    include batch submit, batch review, batch pass and batch reject for daily income and order
+    detail reports — so `na` would be wrong. But Micro Connect publishes no reference, no
+    operation list and no reversal semantics, so no reversal operation and no reversal window
+    can be recorded. Deliberately left ungraded rather than asserting a window the provider has
+    never stated: an invented reversal window on a financial reporting API is the one error in
+    this pipeline that could cost a user real money.
+  operations: []
+  windows: []
+  blocked_by: >-
+    Enterprise-account login gate on https://open.microconnect.com/ — see the x-coverage block
+    in apis.yml.

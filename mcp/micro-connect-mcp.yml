@@ -1,0 +1,23 @@
+generated: '2026-08-25'
+method: searched
+source: >-
+  Searched every Micro Connect host reachable in this pass (www.microconnect.com, mcex.mo,
+  open.microconnect.com/.cn, mt.microconnect.com, api.mcisaas.com, kc.mcisaas.com, mcisaas.com)
+  plus npm, PyPI and GitHub, 2026-08-25
+status: none
+server_count: 0
+tools: []
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+note: >-
+  Micro Connect ships no MCP server — no hosted endpoint, no stdio package, no mention of MCP
+  anywhere on its public surface. No candidate tool list was derived either, because there is no
+  OpenAPI to derive one from: the only operation names visible anywhere are minified route
+  strings inside the Open Platform's browser bundle, which is not a contract. NO MCPServer
+  pointer is emitted in apis.yml — an artifact recording an absence must not be scored as a
+  presence.

@@ -1,0 +1,26 @@
+generated: '2026-08-25'
+method: probed
+source: >-
+  Live anonymous requests to https://api.mcisaas.com/ and https://kc.mcisaas.com/ (2026-08-25),
+  plus a search of every public Micro Connect page for a published limit. No limits are documented.
+limit_count: 0
+limits: []
+headers: []
+status_code_on_exhaustion: null
+note: >-
+  Micro Connect documents no rate limits — there is no developer portal, reference or terms page
+  that states one. No RateLimit-*, X-RateLimit-* or Retry-After header appeared on any
+  unauthenticated response from api.mcisaas.com or kc.mcisaas.com. An honest zero: it means
+  "checked, nothing published", not "unlimited". Any limits enforced on the Open Platform sit
+  behind the enterprise login and were not observable.
+observed_response_headers:
+  api.mcisaas.com:
+    rate_limit_headers: none
+    note: >-
+      Gateway is Apache ShenYu, which ships a rate-limiter plugin; whether it is enabled on the
+      Open Platform routes cannot be determined without credentials.
+  kc.mcisaas.com:
+    rate_limit_headers: none
+    note: >-
+      Keycloak enforces brute-force protection per realm by configuration, but the realm settings
+      are not exposed anonymously.

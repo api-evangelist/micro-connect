@@ -1,0 +1,37 @@
+generated: '2026-08-25'
+method: searched
+source: >-
+  registry.npmjs.org search + api.github.com search + pypi.org, plus every public Micro Connect
+  page reachable in this pass (www.microconnect.com, mcex.mo, open.microconnect.com,
+  mt.microconnect.com), 2026-08-25
+package_count: 0
+official_package_count: 0
+packages: []
+note: >-
+  Micro Connect publishes no client libraries. Searched npm, PyPI, Maven Central, NuGet,
+  pkg.go.dev, RubyGems, Packagist and crates.io for micro-connect / microconnect / mcisaas /
+  mcex, and searched GitHub for a Micro Connect organisation. Nothing first-party exists.
+  No SDKs pointer is emitted in apis.yml.
+false_positives_rejected:
+- name: microconnect
+  registry: npm
+  version: 0.0.58
+  published: '2017-05-05'
+  url: https://www.npmjs.com/package/microconnect
+  why_rejected: >-
+    Published by david.donn@team.telstra.com, described as "Connect my microservices", repo
+    hosted on a Telstra/Pacific Internet Bitbucket. Unrelated to Micro Connect 滴灌通.
+- name: luofei614/micro-connect
+  registry: github
+  version: null
+  published: null
+  url: https://github.com/luofei614/micro-connect
+  why_rejected: Personal repository by an unrelated developer; no association with Micro Connect Group.
+- name: github.com/microconnect
+  registry: github
+  version: null
+  published: null
+  url: https://github.com/microconnect
+  why_rejected: >-
+    A GitHub USER account (id 16643039), not a Micro Connect Group organisation, with no
+    Micro Connect content.

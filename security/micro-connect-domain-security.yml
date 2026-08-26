@@ -1,0 +1,69 @@
+generated: '2026-08-25'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.microconnect.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Oct  6 06:08:59 2026 GMT
+  hsts: false
+- host: open.microconnect.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 10 01:48:24 2026 GMT
+  hsts: null
+- host: api.mcisaas.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Jan 10 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: open.microconnect.cn
+  https: true
+  tls_version: TLSv1.2
+  cert_subject: C=CN, ST=海南省, L=海口市, O=滴灌通管理咨询（海南）有限公司, CN=microconnect.cn
+  cert_issuer: GeoTrust CN RSA CA G1
+  cert_expires: Nov 27 23:59:59 2024 GMT
+  cert_expired: true
+  note: EXPIRED CERTIFICATE. open.microconnect.com (valid cert) 301-redirects here, so the Open Platform
+    is unreachable to any TLS-verifying client. Observed 2026-08-25.
+- host: kc.mcisaas.com
+  https: true
+  tls_version: TLSv1.2
+  cert_subject: C=CN, ST=海南省, L=海口市, O=滴灌通管理咨询（海南）有限公司, CN=*.mcisaas.com
+  cert_expires: Jan 10 23:59:59 2027 GMT
+  cert_expired: false
+  note: Keycloak identity provider. Certificate organisation confirms first-party ownership of the mcisaas.com
+    estate.
+- host: mcex.mo
+  https: true
+  tls_version: TLSv1.3
+  cert_subject: CN=*.mcex.mo
+  cert_expires: Dec  2 06:07:11 2026 GMT
+  cert_expired: false
+- host: mt.microconnect.com
+  https: true
+  tls_version: TLSv1.3
+  cert_subject: CN=*.microconnect.com
+  cert_expires: Oct  6 06:08:59 2026 GMT
+  cert_expired: false
+  note: M-Terminal investor terminal.
+domains:
+- domain: microconnect.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: mcisaas.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false
+note: 'Probe extended by hand on 2026-08-25 to cover hosts the automated probe does not read out of apis.yml:
+  the Open Platform origin behind the open.microconnect.com redirect, the Keycloak identity provider,
+  the MCEX exchange host and the M-Terminal host. KEY FINDING: open.microconnect.cn serves a certificate
+  that expired 2024-11-27.'
+ownership_evidence: TLS certificates on api.mcisaas.com, kc.mcisaas.com and open.microconnect.cn are all
+  issued to O=滴灌通管理咨询（海南）有限公司 (Micro Connect Management Consulting (Hainan) Co., Ltd), confirming the
+  mcisaas.com estate is first-party Micro Connect infrastructure and not a third-party vendor domain.

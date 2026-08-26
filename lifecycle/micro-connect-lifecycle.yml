@@ -1,0 +1,77 @@
+generated: '2026-08-25'
+method: searched
+source: >-
+  https://www.microconnect.com/ (200), https://www.microconnect.com/about?lang=en (200),
+  https://www.microconnect.com/news (200), https://www.microconnect.com/rss.xml (200),
+  https://mcex.mo/en (200), https://mcex.mo/en/guide/resource/announcement (200),
+  live TLS/HTTP probes of every Micro Connect host, 2026-08-25
+summary: >-
+  Micro Connect publishes no API versioning policy, no deprecation policy, no Sunset/Deprecation
+  header commitment, no SLA and no status page. It does publish a dated corporate news feed and
+  a dated MCEX market-communications/announcement stream, which is the only public change signal
+  in the estate — and neither is an API changelog.
+versioning:
+  policy_published: false
+  scheme: null
+  note: >-
+    No version segment is visible in the Open Platform's request paths (they are flat
+    /open-platform/<resource>/<action> under the /api gateway prefix, read from the provider's
+    own SPA bundle). No version header, no /v1/ prefix, no documented policy.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    No deprecation or sunset policy is published anywhere on microconnect.com, mcex.mo or the
+    Open Platform. No pointer emitted.
+sla:
+  published: false
+  note: No uptime or support-response SLA is published on any public page.
+status_page:
+  present: false
+  probed:
+  - url: https://status.microconnect.com/
+    result: NXDOMAIN
+  - url: https://status.mcex.mo/
+    result: NXDOMAIN
+  - url: https://mcex.mo/en/guide/resource/announcement
+    status: 200
+    note: >-
+      MCEX "Market Communications" — a dated exchange announcement stream. This is market
+      notice publishing, not an operational status page. No StatusPage pointer emitted.
+change_signals:
+- name: Micro Connect corporate news
+  url: https://www.microconnect.com/news
+  feed: https://www.microconnect.com/rss.xml
+  status: 200
+  format: RSS 2.0
+  last_build_date: 'Tue, 04 Aug 2026 00:00:00 GMT'
+  note: Company news, founder's blog and media coverage. Chinese-language. Not an API changelog.
+- name: MCEX Market Communications
+  url: https://mcex.mo/en/guide/resource/announcement
+  status: 200
+  note: Dated exchange announcements. Not an API changelog.
+operational_findings:
+- severity: high
+  finding: >-
+    The Micro Connect Open Platform serves an EXPIRED TLS certificate. open.microconnect.com
+    (valid Google Trust Services certificate) 301-redirects to open.microconnect.cn, whose
+    certificate — C=CN, O=滴灌通管理咨询（海南）有限公司, CN=microconnect.cn, issued by GeoTrust CN
+    RSA CA G1 — expired on 2024-11-27, roughly nine months before this probe. Any standard
+    HTTP client, SDK or agent reaching the Open Platform fails TLS verification; only a browser
+    user clicking through the interstitial gets in.
+  observed: '2026-08-25'
+  evidence: 'openssl s_client -connect open.microconnect.cn:443 -> notAfter=Nov 27 23:59:59 2024 GMT'
+- severity: medium
+  finding: >-
+    open.microconnect.cn returned HTTP 503 on every /.well-known/* probe in this pass, while
+    the application root returned 200 — an inconsistent edge configuration.
+  observed: '2026-08-25'
+- severity: low
+  finding: >-
+    api.mcisaas.com returns HTTP 200 for every unmatched path, carrying the Apache ShenYu
+    envelope {"code":-107,"message":"divide:Can not find selector, please check your
+    configuration!"}. A soft-200 on unknown routes makes the gateway indistinguishable from a
+    working endpoint to any client that checks status codes.
+  observed: '2026-08-25'

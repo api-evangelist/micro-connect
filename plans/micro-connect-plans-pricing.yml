@@ -1,0 +1,122 @@
+generated: '2026-08-25'
+method: searched
+source: >-
+  https://mcex.mo/en/guide/market/fee (HTTP 200) and the fee schedule it links,
+  https://mcexp-oss-prd.mcisaas.com/cms-strapi/MCEX_Services_and_Fees_20250303_v_F_9166bdbe59.pdf
+  (HTTP 200, application/pdf, 6 pages, release date 2025-03-03)
+plan_count: 0
+plans: []
+note: >-
+  Micro Connect publishes NO API plans, no developer tiers, no usage pricing and no free tier —
+  there is no self-serve API product to price. What it does publish, and publishes well, is the
+  MCEX exchange fee schedule: a dated, versioned, six-page document covering listing, trading and
+  collection services, with tiered appendices. That is a market-service price list, not API
+  pricing, so plan_count stays 0 and the schedule is recorded separately below rather than being
+  dressed up as plans.
+fee_schedule:
+  name: MCEX Services and Fees
+  release_date: '2025-03-03'
+  publisher: Micro Connect (Macao) Financial Assets Exchange (MCEX)
+  landing_page: https://mcex.mo/en/guide/market/fee
+  document: https://mcexp-oss-prd.mcisaas.com/cms-strapi/MCEX_Services_and_Fees_20250303_v_F_9166bdbe59.pdf
+  format: PDF
+  currencies:
+  - RMB
+  - MOP
+  - HKD
+  - USD
+  items:
+  - id: 1
+    name: RBO Fundraising Service Fee
+    section: Listing, Issuance and Fundraising Services
+    payable_by: Revenue-Sharing Entity (RBO issuer)
+    basis: '% of proceeds'
+    frequency: One-off / day of successful order matching
+    rate: 0.25%–1.00%, tiered on RBO contract duration (≤90d 0.25%, ≤180d 0.50%, ≤270d 0.75%, >270d 1.00%)
+  - id: 2
+    name: SPV Application Fee
+    payable_by: SPV Sponsor
+    basis: Flat rate
+    frequency: One-off / day of SPV set-up
+    rate: RMB/MOP/HKD $10,000; USD $1,200
+    waiver: Waived until further notice
+  - id: 3
+    name: SPV Annual Service Fee
+    payable_by: SPV Sponsor
+    basis: Tiered fee schedule on total repo fundraising proceeds
+    frequency: Annual
+    rate: RMB/MOP/HKD $10,000–50,000; USD $1,500–7,500
+    waiver: Waived until further notice
+  - id: 4
+    name: SPV Fundraising Service Fee
+    payable_by: Revenue-Sharing Entity (typically the SPV Sponsor)
+    basis: '% of proceeds (ex-fees)'
+    frequency: One-off / day of successful order matching
+    rate: 0.25%–1.00% based on actual repo length; 1.0% deducted upfront and refunded down on completion
+    note: Charged starting 1 April 2025
+  - id: 5
+    name: SPAC Application Fee
+    payable_by: SPAC Sponsor
+    basis: Flat rate
+    frequency: One-off / day of SPAC set-up
+    rate: RMB/MOP/HKD $50,000; USD $6,000
+    waiver: Waived until further notice
+  - id: 6
+    name: SPAC Annual Service Fee
+    payable_by: SPAC Sponsor
+    basis: Tiered fee schedule on SPAC NAV
+    frequency: Annual
+    rate: RMB/MOP/HKD $50,000–150,000; USD $7,000–22,000
+    waiver: Waived until further notice
+  - id: 7
+    name: SPAC Senior Note Fundraising Service Fee
+    payable_by: SPAC Sponsor
+    basis: '% of proceeds (ex-fees)'
+    frequency: One-off / day of successful order matching
+    rate: 0.10%
+    note: Charged starting 1 April 2025
+  - id: 8
+    name: Trading Fee
+    section: Transaction Services
+    payable_by: RBO / SPV / SPAC buyer and seller
+    basis: '% of transacted amount'
+    frequency: One-off / day of successful order matching
+    rate: 0.10% (each side)
+  - id: 9
+    name: Collection Service Fee
+    section: Collection Services
+    payable_by: RBO Holder / RBU Holder
+    basis: '% of revenue share amount (pre-tax)'
+    frequency: Deducted upon revenue share distribution
+    rate: 0.25%–2.00% based on actual RBO contract duration / expected repo completion date
+  - id: 10
+    name: Funds Withdrawal Fee (on behalf of banks)
+    section: Other Expenses / Costs
+    payable_by: Exchange Participant
+    basis: Flat rate per instruction
+    frequency: Day of withdrawal
+    rate: RMB/MOP/HKD $50; USD $6
+  - id: 11
+    name: Tax-Related Charges in Mainland China
+    section: Other Expenses / Costs
+    payable_by: RBO Holder / RBU Holder
+    basis: '% of revenue share distributed after initial investment is recouped'
+    rate: 20.0%
+    note: >-
+      Rebate available — see MCEX Announcement on Rebate on Tax-Related Charges, 2025-03-03,
+      https://mcexp-oss-prd.mcisaas.com/cms-strapi/MCEX_Announcement_on_Rebate_on_Tax_Related_Charges_20250303_0d5c7dfd2a.pdf
+  - id: 12
+    name: Handling Fee for SPV / SPAC Memo Revisions
+    section: Other Expenses / Costs
+    payable_by: SPV / SPAC Sponsor
+    basis: Flat rate per instruction
+    frequency: One-off / upon completion of revisions
+    rate: RMB/MOP/HKD $800; USD $100
+    waiver: First-time revision waived
+  related_documents:
+  - title: MCEX Announcement on Rebate on Tax-Related Charges
+    date: '2025-03-03'
+    url: https://mcexp-oss-prd.mcisaas.com/cms-strapi/MCEX_Announcement_on_Rebate_on_Tax_Related_Charges_20250303_0d5c7dfd2a.pdf
+  - title: Handling Fee for Change in SPV / SPAC Memorandum Related to KYC Due Diligence
+    date: '2024-10-22'
+    url: https://mcexp-oss-prd.mcisaas.com/cms-strapi/MCEX_Circular_Handling_Fee_for_Change_in_SPV_and_SPAC_KYC_DD_fdc07739d1.pdf

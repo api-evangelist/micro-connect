@@ -1,0 +1,104 @@
+generated: '2026-08-25'
+method: searched
+source: >-
+  https://kc.mcisaas.com/auth/realms/numa-realm/.well-known/openid-configuration (HTTP 200),
+  https://mcex.mo/en (HTTP 200, regulatory statement in the site footer),
+  https://mcex.mo/en/guide/resource/rules-and-regulation (HTTP 200),
+  https://mcex.mo/en/guide/resource/document-library (HTTP 200)
+note: >-
+  Micro Connect publishes no security-certification trust centre (no SOC 2, ISO 27001, PCI
+  DSS or HIPAA claim was found anywhere on its public surface). What it does publish is a
+  named financial-services regulatory authorisation for MCEX and a set of market rule
+  documents. Both are recorded below with the exact page they came from. Nothing here is
+  inferred from the company's sector.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    kc.mcisaas.com serves RFC 8414-shaped OAuth 2.0 / OIDC discovery documents for two realms,
+    with authorization, token, introspection, revocation, device-authorization and pushed
+    authorization request endpoints.
+- id: oidc
+  conforms: true
+  evidence: >-
+    OpenID Provider Configuration documents at
+    /auth/realms/{master,numa-realm}/.well-known/openid-configuration, HTTP 200, advertising
+    id_token signing algorithms, userinfo, jwks_uri and end_session_endpoint.
+- id: pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [plain, S256] in both realm discovery documents.'
+- id: oauth2-par
+  conforms: true
+  evidence: >-
+    pushed_authorization_request_endpoint present;
+    require_pushed_authorization_requests is false.
+- id: mtls-bound-tokens
+  conforms: true
+  evidence: >-
+    tls_client_certificate_bound_access_tokens is true and a full mtls_endpoint_aliases block
+    is published in both realm discovery documents.
+- id: fapi
+  conforms: false
+  evidence: >-
+    The building blocks FAPI requires (PAR, mTLS-bound tokens, private_key_jwt, S256) are all
+    advertised, but the realms still advertise the implicit and password grants and do not
+    require PAR, and Micro Connect makes no FAPI conformance claim. No FAPI certification was
+    found on the OpenID Foundation certification register or on any Micro Connect page.
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    The api.mcisaas.com gateway returns a bespoke {"code":<int>,"message":<string>,"data":null}
+    envelope with content-type application/json, not application/problem+json. Observed live
+    on 2026-08-25.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document is served on any Micro Connect host. Probed
+    /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /v2/api-docs, /v3/api-docs,
+    /api-docs, /doc.html, /swagger-ui.html, /docs and /redoc against www.microconnect.com and
+    api.mcisaas.com — all 404 (marketing host) or ShenYu soft-200 (gateway host).
+regulatory:
+- regime: Monetary Authority of Macao (AMCM)
+  entity: Micro Connect (Macao) Financial Assets Exchange (MCEX)
+  status: authorised and regulated
+  instrument: Ordem Executiva n.º 47/2022, signed by the Chief Executive of Macao, December 2022
+  registration_number: SO97314
+  evidence: >-
+    "MCEX is a financial institution approved by an executive order (Ordem Executiva n.º
+    47/2022) signed by the Chief Executive of Macao in December 2022 and regulated by the
+    Monetary Authority of Macao." — https://mcex.mo/en (HTTP 200, site footer, read 2026-08-25)
+market_rulebooks:
+- title: General Rules of Micro Connect (Macao) Financial Assets Exchange
+  source: https://mcex.mo/en/guide/resource/rules-and-regulation
+  format: web/PDF
+- title: Rules for Revenue Based Vehicles of Micro Connect (Macao) Financial Assets Exchange
+  source: https://mcex.mo/en/guide/resource/rules-and-regulation
+  format: web/PDF
+- title: MCEX Market Accepted Protocol (MAP)
+  date: '2024-01-01'
+  source: https://mcex.mo/en/guide/resource/document-library
+  format: PDF
+  note: >-
+    The closest thing Micro Connect publishes to an interface specification. It is a market
+    protocol document in prose, not a machine-readable contract, and it was not parsed here.
+- title: MCEX SPAC Performance Score Instruction
+  date: '2025-06-24'
+  source: https://mcex.mo/en/guide/resource/document-library
+- title: MCEX SPV Performance Score Instruction
+  date: '2025-04-16'
+  source: https://mcex.mo/en/guide/resource/document-library
+- title: Micro Connect Gauge Valuation Method Instruction
+  date: '2025-01-06'
+  source: https://mcex.mo/en/guide/resource/document-library
+domain_standard:
+  conforms: false
+  note: >-
+    Revenue-based financing has no cross-vendor machine-readable interchange standard, and
+    Micro Connect's contracts do not declare one — no ISO 20022 message type, no FIX/FpML
+    surface, no FDX or Open Banking shape was found on any host. Micro Connect's own MCEX
+    Market Accepted Protocol (MAP) is a first-party market rulebook, not an industry standard
+    it conforms TO. Reward-only check: recorded absent, not penalised.
+security_certifications: []
+security_certifications_note: >-
+  None published. No trust centre, no SOC 2 / ISO 27001 / PCI DSS statement, and no
+  security.txt on any host (see well-known/micro-connect-well-known.yml).

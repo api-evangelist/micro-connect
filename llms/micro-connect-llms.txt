@@ -1,0 +1,46 @@
+# Micro Connect (滴灌通)
+
+> Micro Connect is a Hong Kong-founded financial market infrastructure group, established in 2021 by Charles Li (former CEO of Hong Kong Exchanges and Clearing) and Gary Zhang, that turns the daily revenue of micro, small and medium businesses into a standardised, tradable asset class. Its Daily Revenue Obligation (DRO) and revenue-based financing contracts are listed, cleared and settled on the Micro Connect (Macao) Financial Assets Exchange (MCEX), a financial institution approved by Macao executive order Ordem Executiva n.º 47/2022 and regulated by the Monetary Authority of Macao.
+
+## What an agent needs to know first
+
+- **There is no public API.** Micro Connect publishes no OpenAPI, no GraphQL SDL, no AsyncAPI, no MCP server, no A2A agent card, no SDK and no developer portal. Every probe run on 2026-08-25 is recorded in this repository.
+- **An API surface exists, but it is gated.** The Micro Connect Open Platform (滴灌通开放平台) at https://open.microconnect.com/ is an enterprise console for brands and merchants. It calls a private HTTP API through an Apache ShenYu gateway at `https://api.mcisaas.com/api`, authenticated with OpenID Connect bearer tokens from a Keycloak identity provider at `https://kc.mcisaas.com` (realm `numa-realm`, client `web-mcc-open-platform`). Access requires enterprise account registration and login.
+- **Do not attempt to construct requests against `api.mcisaas.com`.** Unmatched paths return HTTP 200 with `{"code":-107,"message":"divide:Can not find selector, please check your configuration!","data":null}` — a soft-200 that looks like success to a naive client.
+- **The Open Platform serves an expired TLS certificate.** `open.microconnect.com` redirects to `open.microconnect.cn`, whose certificate expired on 2024-11-27. Standard HTTP clients will fail verification.
+
+## Company
+
+- [Micro Connect](https://www.microconnect.com/): Group site (Chinese and English). Company overview, founders, milestones.
+- [About Micro Connect](https://www.microconnect.com/about?lang=en): Mission, founders (Charles Li, Gary Zhang), milestones 2021–present.
+- [Ecosystem](https://www.microconnect.com/ecosystem?lang=en): Roles for investors, financing parties and partners.
+- [News](https://www.microconnect.com/news): Official announcements, founder's blog and media coverage. RSS: https://www.microconnect.com/rss.xml
+- [Contact](https://www.microconnect.com/contact): Group contact page.
+
+## MCEX — the exchange
+
+- [MCEX](https://mcex.mo/en): Micro Connect (Macao) Financial Assets Exchange, wholly owned by Micro Connect Group. Publishes live cumulative funds raised, revenue shared, SPV/SPAC counts and listed asset counts.
+- [Products overview](https://mcex.mo/en/guide/product/overview): RBO, SPV, SPAC and ETF product families.
+- [Fees](https://mcex.mo/en/guide/market/fee): Fee landing page.
+- [MCEX Services and Fees (PDF, 2025-03-03)](https://mcexp-oss-prd.mcisaas.com/cms-strapi/MCEX_Services_and_Fees_20250303_v_F_9166bdbe59.pdf): The complete published fee schedule — listing, trading (0.10% each side), collection (0.25–2.00%) and other charges.
+- [Rules and regulations](https://mcex.mo/en/guide/resource/rules-and-regulation): General Rules; Rules for Revenue Based Vehicles.
+- [Documents library](https://mcex.mo/en/guide/resource/document-library): MCEX Market Accepted Protocol (MAP, 2024-01-01), Performance Score instructions, Gauge Valuation Method instruction.
+- [Market communications](https://mcex.mo/en/guide/resource/announcement): Dated exchange announcements.
+- [Market support](https://mcex.mo/en/guide/resource/support): Contacts — info@mcex.mo, listing@mcex.mo, memberservices@mcex.mo, media@mcex.mo; +853-2883-2388.
+
+## Operator platforms (all login-gated)
+
+- [Open Platform](https://open.microconnect.com/): 滴灌通开放平台 — brand and merchant onboarding, daily revenue reporting, order-detail reporting, data review, authorisation files, settlement export.
+- [M-Terminal](https://mt.microconnect.com/): Investor terminal for MCEX listings.
+
+## Machine-readable artifacts that DO exist
+
+- [OpenID Connect discovery — numa-realm](https://kc.mcisaas.com/auth/realms/numa-realm/.well-known/openid-configuration): The realm the Open Platform authenticates against. Advertises PKCE (S256), Pushed Authorization Requests, mTLS-bound access tokens, private_key_jwt and CIBA.
+- [OpenID Connect discovery — master realm](https://kc.mcisaas.com/auth/realms/master/.well-known/openid-configuration)
+
+These two documents are the only machine-readable API artifacts Micro Connect serves anonymously. Both are saved verbatim in this repository under `well-known/`.
+
+## Optional
+
+- [Wikipedia: Micro Connect](https://en.wikipedia.org/wiki/Micro_Connect)
+- [API Evangelist profile](https://apis.io/provider/micro-connect/)

@@ -64,5 +64,10 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Micro Connect is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Micro Connect (滴灌通) is a Hong Kong-founded financial market infrastructure group, established in 2021 by Charles Li (former CEO of Hong Kong Exchanges and Clearing) and Gary Zhang, that turns the daily revenue of micro, small and medium businesses into a standardised, tradable asset class. Its Daily Revenue Obligation (DRO) and revenue-based financing contracts are listed, cleared and settled on the Micro Connect (Macao) Financial Assets Exchange (MCEX), a financial institution approved by Macao executive order Ordem Executiva n.º 47/2022 and regulated by the Monetary Authority of Macao.
+
+Micro Connect publishes no public API contract, developer portal or SDK. An API surface exists — the Micro Connect Open Platform console calls a private gateway at `api.mcisaas.com` behind a Keycloak login — but it is reachable only after enterprise account registration. See the `x-coverage` block in `apis.yml`.
+
+- https://www.microconnect.com/
+- https://mcex.mo/en
+- https://open.microconnect.com/

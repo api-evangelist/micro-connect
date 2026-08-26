@@ -1,0 +1,46 @@
+generated: '2026-08-25'
+method: probed
+source: >-
+  Live anonymous requests to https://api.mcisaas.com/ and a dozen unmatched paths beneath it,
+  2026-08-25. No OpenAPI exists to derive from and no error reference is published.
+format: bespoke
+rfc9457: false
+note: >-
+  Micro Connect publishes no error-code reference. Exactly ONE error shape could be observed
+  without credentials — the gateway's own routing-miss response — and it is recorded verbatim
+  below. This catalogue is deliberately one entry long: every other error class on this API
+  sits behind the enterprise login and is not guessed at here.
+envelope:
+  content_type: application/json
+  fields:
+    code:
+      type: integer
+      description: Application status code. Negative values indicate an error.
+    message:
+      type: string
+      description: Human-readable message, English.
+    data:
+      type: 'null | object'
+      description: Payload on success; null on error.
+  http_status: >-
+    The observed error is returned with HTTP 200, not a 4xx/5xx. Status-code-based error
+    handling will not detect it.
+problem_types:
+- code: -107
+  http_status: 200
+  title: Gateway selector not matched
+  message: 'divide:Can not find selector, please check your configuration!'
+  meaning: >-
+    The Apache ShenYu gateway at api.mcisaas.com received a request for a path that matches no
+    configured selector — the equivalent of a 404, returned as a 200.
+  remediation: >-
+    Check the request path against the /api-prefixed route the Open Platform console uses. As
+    an unauthenticated caller this is also what you get for any path that does not exist.
+  observed: '2026-08-25'
+  evidence: 'GET https://api.mcisaas.com/ -> 200 {"code":-107,"message":"divide:Can not find selector, please check your configuration!","data":null}'
+not_captured:
+  reason: >-
+    Authentication, authorisation, validation, business-rule and rate-limit error classes could
+    not be observed. They require an enrolled enterprise account on the Open Platform, and no
+    error reference is published.
+  blocked_by: https://open.microconnect.com/

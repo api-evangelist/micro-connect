@@ -1,0 +1,177 @@
+generated: '2026-08-25'
+method: probed
+source: >-
+  Live anonymous GETs of /.well-known/* on every Micro Connect host discovered in this pass
+  (2026-08-25). Two real documents were returned: the OpenID Connect discovery documents of
+  the group's Keycloak identity provider at kc.mcisaas.com, served at the Keycloak legacy
+  /auth/realms/<realm>/.well-known/openid-configuration path.
+note: >-
+  The root /.well-known/* paths return nothing anywhere in the estate. www.microconnect.com
+  and mcex.mo answer an honest 404 HTML page. api.mcisaas.com is an Apache ShenYu gateway
+  that answers HTTP 200 with the JSON envelope
+  {"code":-107,"message":"divide:Can not find selector, please check your configuration!"}
+  for EVERY unmatched path — a soft-200, not a document, and recorded as a miss.
+  mcisaas.com, mt.microconnect.com and store.microconnect.cn return their SPA HTML shell for
+  every /.well-known/* path — also a soft-200 and also a miss. The only genuine documents in
+  the estate are the two Keycloak OIDC discovery documents, saved verbatim beside this file.
+hosts:
+- host: kc.mcisaas.com
+  note: >-
+    Keycloak identity provider for the Micro Connect SaaS estate. TLS certificate is issued
+    to O=滴灌通管理咨询（海南）有限公司 (Micro Connect Management Consulting (Hainan) Co., Ltd),
+    CN=*.mcisaas.com — first-party. Two realms answer anonymously; numa-realm is the realm the
+    Open Platform SPA authenticates against (clientId web-mcc-open-platform, read from the
+    provider's own JS bundle).
+  documents:
+  - path: /auth/realms/master/.well-known/openid-configuration
+    status: 200
+    file: micro-connect-kc-master-openid-configuration.json
+    content_type: application/json
+  - path: /auth/realms/numa-realm/.well-known/openid-configuration
+    status: 200
+    file: micro-connect-kc-numa-realm-openid-configuration.json
+    content_type: application/json
+  - path: /auth/realms/numa-realm/.well-known/uma2-configuration
+    status: 200
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: www.microconnect.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: mcex.mo
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: api.mcisaas.com
+  note: >-
+    Every path answers 200 with the ShenYu "Can not find selector" envelope. Recorded as a
+    miss — a soft-200 is not a document.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    soft_404: true
+  - path: /llms.txt
+    status: 200
+    file: null
+    soft_404: true
+- host: mt.microconnect.com
+  note: SPA HTML shell returned for every path (soft-200). Recorded as a miss.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    soft_404: true
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    soft_404: true
+- host: open.microconnect.cn
+  note: >-
+    Answered 503 on every /.well-known/* path during this pass. Separately, this host serves
+    an EXPIRED TLS certificate (CN=microconnect.cn, notAfter 2024-11-27) — see
+    security/micro-connect-domain-security.yml.
+  documents:
+  - path: /.well-known/security.txt
+    status: 503
+  - path: /.well-known/openid-configuration
+    status: 503
+  - path: /.well-known/api-catalog
+    status: 503
+  - path: /.well-known/agent-card.json
+    status: 503
+  - path: /.well-known/agent.json
+    status: 503
+- host: store.microconnect.cn
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
