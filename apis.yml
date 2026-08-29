@@ -15,6 +15,17 @@ description: >-
   authenticated by a Keycloak identity provider at kc.mcisaas.com. No public developer
   program, API reference or machine-readable API contract is published; the integration
   surface is reachable only after enterprise account registration and login.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.microconnect.com/images/logo-dark.png
 url: https://raw.githubusercontent.com/api-evangelist/micro-connect/refs/heads/main/apis.yml
 x-type: company
