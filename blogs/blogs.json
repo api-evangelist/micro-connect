@@ -1,0 +1,21 @@
+{
+  "repo": "micro-connect",
+  "feeds": [
+    {
+      "source": "https://www.microconnect.com/",
+      "feed_url": "https://www.microconnect.com/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
+      "source": "https://www.microconnect.com/news",
+      "feed_url": "https://www.microconnect.com/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-30T22:33:40Z"
+}
