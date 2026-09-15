@@ -1,19 +1,16 @@
 aid: micro-connect
 name: Micro Connect
-description: >-
-  Micro Connect (滴灌通) is a Hong Kong-founded financial market infrastructure group,
-  established in 2021 by Charles Li (former CEO of Hong Kong Exchanges and Clearing) and
-  Gary Zhang, that turns the daily revenue of micro, small and medium businesses into a
-  standardised, tradable asset class. Its Daily Revenue Obligation (DRO) and revenue-based
-  financing contracts are listed, cleared and settled on the Micro Connect (Macao)
-  Financial Assets Exchange (MCEX) — a financial institution approved by Macao executive
-  order Ordem Executiva n.º 47/2022 and regulated by the Monetary Authority of Macao, and
-  wholly owned by Micro Connect Group. The group runs several operator-facing web platforms
-  on its own SaaS stack — the Micro Connect Open Platform (open.microconnect.com) for brand
-  and merchant data onboarding, the M-Terminal investor terminal (mt.microconnect.com), and
-  the store/merchant consoles — all served from a single API gateway at api.mcisaas.com and
-  authenticated by a Keycloak identity provider at kc.mcisaas.com. No public developer
-  program, API reference or machine-readable API contract is published; the integration
+description: Micro Connect (滴灌通) is a Hong Kong-founded financial market infrastructure group, established
+  in 2021 by Charles Li (former CEO of Hong Kong Exchanges and Clearing) and Gary Zhang, that turns the
+  daily revenue of micro, small and medium businesses into a standardised, tradable asset class. Its Daily
+  Revenue Obligation (DRO) and revenue-based financing contracts are listed, cleared and settled on the
+  Micro Connect (Macao) Financial Assets Exchange (MCEX) — a financial institution approved by Macao executive
+  order Ordem Executiva n.º 47/2022 and regulated by the Monetary Authority of Macao, and wholly owned
+  by Micro Connect Group. The group runs several operator-facing web platforms on its own SaaS stack —
+  the Micro Connect Open Platform (open.microconnect.com) for brand and merchant data onboarding, the
+  M-Terminal investor terminal (mt.microconnect.com), and the store/merchant consoles — all served from
+  a single API gateway at api.mcisaas.com and authenticated by a Keycloak identity provider at kc.mcisaas.com.
+  No public developer program, API reference or machine-readable API contract is published; the integration
   surface is reachable only after enterprise account registration and login.
 deliveryModel:
   model: saas
@@ -73,17 +70,15 @@ tags_raw:
 - Macao
 - China
 apis:
-- aid: micro-connect-open-platform
+- aid: micro-connect:micro-connect-open-platform
   name: Micro Connect Open Platform API
-  description: >-
-    The private HTTP API behind the Micro Connect Open Platform (滴灌通开放平台), the
-    enterprise console brands and merchants use to register, submit daily revenue and order
-    detail reports, review data, manage authorisation files and export settlement data. The
-    console is a browser SPA served from open.microconnect.com; every request it makes goes
-    to the Apache ShenYu gateway at api.mcisaas.com under the /api prefix and is
-    bearer-authenticated against the Keycloak realm numa-realm at kc.mcisaas.com. Micro
-    Connect publishes no OpenAPI, no reference documentation and no developer portal for
-    this surface — it is reachable only after enterprise account registration and login.
+  description: The private HTTP API behind the Micro Connect Open Platform (滴灌通开放平台), the enterprise console
+    brands and merchants use to register, submit daily revenue and order detail reports, review data,
+    manage authorisation files and export settlement data. The console is a browser SPA served from open.microconnect.com;
+    every request it makes goes to the Apache ShenYu gateway at api.mcisaas.com under the /api prefix
+    and is bearer-authenticated against the Keycloak realm numa-realm at kc.mcisaas.com. Micro Connect
+    publishes no OpenAPI, no reference documentation and no developer portal for this surface — it is
+    reachable only after enterprise account registration and login.
   humanURL: https://open.microconnect.com/
   baseURL: https://api.mcisaas.com/api
   tags:
@@ -149,13 +144,11 @@ x-enrichment:
 x-coverage:
   state: gated
   reason: partner-login
-  detail: >-
-    Micro Connect's only API surface is the Open Platform (滴灌通开放平台) at
-    open.microconnect.com, an enterprise console whose SPA calls an Apache ShenYu gateway at
-    api.mcisaas.com behind a Keycloak login (realm numa-realm, client web-mcc-open-platform);
-    there is no developer portal, no API reference and no spec at any path on any host, and the
-    console's origin open.microconnect.cn has served an expired TLS certificate since
-    2024-11-27.
+  detail: Micro Connect's only API surface is the Open Platform (滴灌通开放平台) at open.microconnect.com, an
+    enterprise console whose SPA calls an Apache ShenYu gateway at api.mcisaas.com behind a Keycloak login
+    (realm numa-realm, client web-mcc-open-platform); there is no developer portal, no API reference and
+    no spec at any path on any host, and the console's origin open.microconnect.cn has served an expired
+    TLS certificate since 2024-11-27.
   evidence:
   - url: https://open.microconnect.com/
     status: 301
