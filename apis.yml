@@ -47,7 +47,7 @@ created: '2026-08-25'
 modified: '2026-08-25'
 tags:
 - Company
-- Financial-Services
+- Financial Services
 - Capital Markets
 - Exchange
 - Revenue-Based Financing
@@ -69,6 +69,7 @@ tags_raw:
 - Hong Kong
 - Macao
 - China
+- Financial-Services
 apis:
 - aid: micro-connect:micro-connect-open-platform
   name: Micro Connect Open Platform API
